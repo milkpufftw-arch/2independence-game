@@ -162,7 +162,7 @@
   </script>
 
   <script type="text/babel">
-    const { useEffect, useMemo, useRef, useState } = React;
+    const { useEffect, useMemo, useState } = React;
 
     const INITIAL_STATS = {
       money: 0,
@@ -185,209 +185,33 @@
     ];
 
     const GENERIC_JOB_QUESTIONS = [
-      {
-        id: "gq1",
-        q: "打工前先確認哪一件事最能降低風險？",
-        options: ["只看薪水高不高", "先交保證金給對方", "確認公司/地點/聯絡方式是否真實", "把個資全部提供越快越好"],
-        answerIndex: 2
-      },
-      {
-        id: "gq2",
-        q: "面試時對方要求你提供「提款卡＋密碼」最可能是？",
-        options: ["正常流程", "資安演練", "詐騙/人頭帳戶風險", "福利加碼"],
-        answerIndex: 2
-      },
-      {
-        id: "gq3",
-        q: "遇到不合理要求（例如先匯款）你可以怎麼做？",
-        options: ["怕失去機會就照做", "先詢問、保留證據並拒絕", "立刻把存款全領出來", "把手機借給對方操作"],
-        answerIndex: 1
-      },
-      {
-        id: "gq4",
-        q: "打工排班臨時改動，你應該先？",
-        options: ["消失不回", "先跟主管確認並留下文字紀錄", "直接上網罵店家", "把同事電話公開"],
-        answerIndex: 1
-      },
-      {
-        id: "gq5",
-        q: "遇到客人言語騷擾，較好的做法是？",
-        options: ["忍耐不說", "單獨跟對方對嗆", "立即告知主管/同事並遠離現場", "把對方帶到暗處談判"],
-        answerIndex: 2
-      },
-      {
-        id: "gq6",
-        q: "通勤太遠影響出勤，你可以？",
-        options: ["硬撐到爆", "提早出門並評估換更近工作", "每天請假", "把責任推給同事"],
-        answerIndex: 1
-      },
-      {
-        id: "gq7",
-        q: "合約或工作內容不清楚時，你應該？",
-        options: ["先做再說", "請對方用文字寫清楚", "直接簽名不看", "把身分證交給對方保管"],
-        answerIndex: 1
-      },
-      {
-        id: "gq8",
-        q: "薪資發放日與方式不明確，你應該？",
-        options: ["算了不問", "詢問並確認轉帳/現金與日期", "先借錢給公司", "用網路貼文逼對方回應"],
-        answerIndex: 1
-      }
+      { id:"gq1", q:"打工前先確認哪一件事最能降低風險？", options:["只看薪水高不高","先交保證金給對方","確認公司/地點/聯絡方式是否真實","把個資全部提供越快越好"], answerIndex:2 },
+      { id:"gq2", q:"面試時對方要求你提供「提款卡＋密碼」最可能是？", options:["正常流程","資安演練","詐騙/人頭帳戶風險","福利加碼"], answerIndex:2 },
+      { id:"gq3", q:"遇到不合理要求（例如先匯款）你可以怎麼做？", options:["怕失去機會就照做","先詢問、保留證據並拒絕","立刻把存款全領出來","把手機借給對方操作"], answerIndex:1 },
+      { id:"gq4", q:"打工排班臨時改動，你應該先？", options:["消失不回","先跟主管確認並留下文字紀錄","直接上網罵店家","把同事電話公開"], answerIndex:1 },
+      { id:"gq5", q:"遇到客人言語騷擾，較好的做法是？", options:["忍耐不說","單獨跟對方對嗆","立即告知主管/同事並遠離現場","把對方帶到暗處談判"], answerIndex:2 },
+      { id:"gq6", q:"通勤太遠影響出勤，你可以？", options:["硬撐到爆","提早出門並評估換更近工作","每天請假","把責任推給同事"], answerIndex:1 },
+      { id:"gq7", q:"合約或工作內容不清楚時，你應該？", options:["先做再說","請對方用文字寫清楚","直接簽名不看","把身分證交給對方保管"], answerIndex:1 },
+      { id:"gq8", q:"薪資發放日與方式不明確，你應該？", options:["算了不問","詢問並確認轉帳/現金與日期","先借錢給公司","用網路貼文逼對方回應"], answerIndex:1 }
     ];
 
     const JOBS = [
-      {
-        id: "job_flyer",
-        title: "派報/傳單",
-        desc: "走路多，日曬雨淋，適合短期補錢。",
-        wage: 190,
-        energy: 10,
-        mood: -2,
-        minAge: 15,
-        strictAge: false,
-        apCost: 1,
-        interviews: [
-          {
-            id: "j1",
-            q: "遇到路人不想拿傳單，你會怎麼做？",
-            options: ["硬塞給對方", "禮貌收回並道謝", "跟對方吵架", "追上去一直塞"],
-            answerIndex: 1
-          }
-        ]
-      },
-      {
-        id: "job_convenience",
-        title: "超商店員",
-        desc: "收銀、補貨、清潔，需要守時與耐心。",
-        wage: 200,
-        energy: 12,
-        mood: -1,
-        minAge: 16,
-        strictAge: false,
-        apCost: 1,
-        interviews: [
-          {
-            id: "j2",
-            q: "客人抱怨時你第一步會？",
-            options: ["先反駁", "先聽完、道歉並回報主管", "直接走掉", "把客人趕走"],
-            answerIndex: 1
-          }
-        ]
-      },
-      {
-        id: "job_food",
-        title: "餐飲外場",
-        desc: "高峰期忙碌，練習溝通與效率。",
-        wage: 210,
-        energy: 14,
-        mood: 0,
-        minAge: 16,
-        strictAge: false,
-        apCost: 1,
-        interviews: [
-          {
-            id: "j3",
-            q: "同時兩桌催菜，你會？",
-            options: ["不理會", "先安撫並確認出餐順序", "怪罪廚房", "直接離職"],
-            answerIndex: 1
-          }
-        ]
-      },
-      {
-        id: "job_tutor",
-        title: "補習班助教",
-        desc: "協助帶班與批改作業，需要耐心。",
-        wage: 230,
-        energy: 9,
-        mood: 2,
-        minAge: 17,
-        strictAge: false,
-        apCost: 1,
-        interviews: [
-          {
-            id: "j4",
-            q: "學生不專心，你會？",
-            options: ["立刻大罵", "先提醒規則並給明確指令", "放任不管", "把學生趕出教室"],
-            answerIndex: 1
-          }
-        ]
-      },
-      {
-        id: "job_construction",
-        title: "工地雜務",
-        desc: "體力活較重，報酬較高，注意安全。",
-        wage: 260,
-        energy: 20,
-        mood: -3,
-        minAge: 18,
-        strictAge: true,
-        apCost: 1,
-        interviews: [
-          {
-            id: "j5",
-            q: "安全帽與防護具的重要性是？",
-            options: ["看心情戴", "別人戴我才戴", "保護生命與避免工傷", "戴了很麻煩所以不戴"],
-            answerIndex: 2
-          }
-        ]
-      },
-      {
-        id: "job_delivery",
-        title: "外送助手",
-        desc: "時間彈性但注意交通安全。",
-        wage: 220,
-        energy: 13,
-        mood: -1,
-        minAge: 16,
-        strictAge: false,
-        apCost: 1,
-        interviews: [
-          {
-            id: "j6",
-            q: "遇到下雨視線差，你會？",
-            options: ["加速衝刺", "放慢速度並注意安全", "闖紅燈趕時間", "不戴安全帽"],
-            answerIndex: 1
-          }
-        ]
-      },
-      {
-        id: "job_tasting",
-        title: "試吃促銷",
-        desc: "需要主動招呼，練習自信。",
-        wage: 200,
-        energy: 10,
-        mood: 1,
-        minAge: 15,
-        strictAge: false,
-        apCost: 1,
-        interviews: [
-          {
-            id: "j7",
-            q: "介紹產品時較好的方式？",
-            options: ["只說很便宜", "說明特色並尊重客人選擇", "一直追著客人", "批評別家產品"],
-            answerIndex: 1
-          }
-        ]
-      },
-      {
-        id: "job_gas",
-        title: "加油站助手",
-        desc: "需要配合班表與基本服務禮儀。",
-        wage: 210,
-        energy: 12,
-        mood: 0,
-        minAge: 16,
-        strictAge: false,
-        apCost: 1,
-        interviews: [
-          {
-            id: "j8",
-            q: "服務時最重要的是？",
-            options: ["速度快就好", "安全流程與禮貌", "一直聊天", "不看客人需求"],
-            answerIndex: 1
-          }
-        ]
-      }
+      { id:"job_flyer", title:"派報/傳單", desc:"走路多，日曬雨淋，適合短期補錢。", wage:190, energy:10, mood:-2, minAge:15, strictAge:false, apCost:1,
+        interviews:[{ id:"j1", q:"遇到路人不想拿傳單，你會怎麼做？", options:["硬塞給對方","禮貌收回並道謝","跟對方吵架","追上去一直塞"], answerIndex:1 }] },
+      { id:"job_convenience", title:"超商店員", desc:"收銀、補貨、清潔，需要守時與耐心。", wage:200, energy:12, mood:-1, minAge:16, strictAge:false, apCost:1,
+        interviews:[{ id:"j2", q:"客人抱怨時你第一步會？", options:["先反駁","先聽完、道歉並回報主管","直接走掉","把客人趕走"], answerIndex:1 }] },
+      { id:"job_food", title:"餐飲外場", desc:"高峰期忙碌，練習溝通與效率。", wage:210, energy:14, mood:0, minAge:16, strictAge:false, apCost:1,
+        interviews:[{ id:"j3", q:"同時兩桌催菜，你會？", options:["不理會","先安撫並確認出餐順序","怪罪廚房","直接離職"], answerIndex:1 }] },
+      { id:"job_tutor", title:"補習班助教", desc:"協助帶班與批改作業，需要耐心。", wage:230, energy:9, mood:2, minAge:17, strictAge:false, apCost:1,
+        interviews:[{ id:"j4", q:"學生不專心，你會？", options:["立刻大罵","先提醒規則並給明確指令","放任不管","把學生趕出教室"], answerIndex:1 }] },
+      { id:"job_construction", title:"工地雜務", desc:"體力活較重，報酬較高，注意安全。", wage:260, energy:20, mood:-3, minAge:18, strictAge:true, apCost:1,
+        interviews:[{ id:"j5", q:"安全帽與防護具的重要性是？", options:["看心情戴","別人戴我才戴","保護生命與避免工傷","戴了很麻煩所以不戴"], answerIndex:2 }] },
+      { id:"job_delivery", title:"外送助手", desc:"時間彈性但注意交通安全。", wage:220, energy:13, mood:-1, minAge:16, strictAge:false, apCost:1,
+        interviews:[{ id:"j6", q:"遇到下雨視線差，你會？", options:["加速衝刺","放慢速度並注意安全","闖紅燈趕時間","不戴安全帽"], answerIndex:1 }] },
+      { id:"job_tasting", title:"試吃促銷", desc:"需要主動招呼，練習自信。", wage:200, energy:10, mood:1, minAge:15, strictAge:false, apCost:1,
+        interviews:[{ id:"j7", q:"介紹產品時較好的方式？", options:["只說很便宜","說明特色並尊重客人選擇","一直追著客人","批評別家產品"], answerIndex:1 }] },
+      { id:"job_gas", title:"加油站助手", desc:"需要配合班表與基本服務禮儀。", wage:210, energy:12, mood:0, minAge:16, strictAge:false, apCost:1,
+        interviews:[{ id:"j8", q:"服務時最重要的是？", options:["速度快就好","安全流程與禮貌","一直聊天","不看客人需求"], answerIndex:1 }] }
     ];
 
     const HOUSING = [
@@ -449,7 +273,6 @@
 
       ccsa_aid_1:{ id:"ccsa_aid_1", q:"申請 CCSA 支持前，你應該？", options:["編造故事","說明真實需求並一起訂目標","只說要錢","把所有責任推給別人"], answerIndex:1 },
       ccsa_aid_2:{ id:"ccsa_aid_2", q:"要維持自立穩定，你需要？", options:["一次爆賺","規律收入＋支持系統＋基本生活技能","只靠運氣","只靠朋友請客"], answerIndex:1 },
-      /* ✅ 這題已修正：最後一個 options 的結尾改為 ] */
       ccsa_aid_3:{ id:"ccsa_aid_3", q:"遇到危機時較好的策略？", options:["消失","求助、分解問題、安排下一步","衝動消費","把密碼給別人"], answerIndex:1 },
 
       ccsa_counseling_1:{ id:"ccsa_counseling_1", q:"心理諮商的目標通常是？", options:["立刻變完美","增加覺察、學習調節情緒與因應","被評分好壞","把痛苦推給別人"], answerIndex:1 },
@@ -622,12 +445,8 @@
               <div className="font-pixel text-3xl leading-none text-slate-900 break-words">{title}</div>
               <button className="neo-btn px-3 py-1 bg-white font-pixel text-2xl" onClick={onClose}>關閉</button>
             </div>
-            <div className="mt-3 text-sm text-slate-800 break-words">
-              {children}
-            </div>
-            {footer ? (
-              <div className="mt-4">{footer}</div>
-            ) : null}
+            <div className="mt-3 text-sm text-slate-800 break-words">{children}</div>
+            {footer ? <div className="mt-4">{footer}</div> : null}
           </div>
         </div>
       );
@@ -639,15 +458,98 @@
           {items.map(it => (
             <div
               key={it.id}
-              className={
-                "absolute left-1/2 -translate-x-1/2 font-pixel text-4xl drop-shadow " +
-                (it.kind === "good" ? "text-emerald-600" : "text-rose-600")
-              }
+              className={"absolute left-1/2 -translate-x-1/2 font-pixel text-4xl drop-shadow " + (it.kind === "good" ? "text-emerald-600" : "text-rose-600")}
               style={{ top: it.top + "px", animation: "popIn 160ms ease-out 1" }}
             >
               {it.text}
             </div>
           ))}
+        </div>
+      );
+    }
+
+    /** ✅ 修正重點：財務管理改成「真正的 React 元件」(才能用 useState) */
+    function FinanceApp({
+      stats, livingCost, bills,
+      setScreen, setModal,
+      addLog, applyDelta,
+      ledger, setLedger
+    }){
+      const [name, setName] = useState("");
+      const [amount, setAmount] = useState("");
+
+      function addLedgerEntry(nm, amt){
+        const n = String(nm||"").trim();
+        const a = Number(amt);
+        if(!n || !isFinite(a) || a === 0){
+          addLog("記帳失敗：請輸入名稱與金額（可正可負）。");
+          applyDelta({ mood:-1 });
+          return;
+        }
+        const entry = { id: uid("led"), name: n, amount: a };
+        setLedger(prev => prev.concat([entry]).slice(-50));
+        applyDelta({ money: a });
+        addLog(`記帳：${n}（${a>0?"+":""}${a}）`);
+      }
+
+      return (
+        <div className="px-3 pb-28">
+          <div className="mt-3 neo-card p-3">
+            <div className="flex items-center justify-between gap-2">
+              <div className="min-w-0">
+                <div className="font-pixel text-3xl leading-none break-words">財務管家</div>
+                <div className="text-xs text-slate-600 mt-1 break-words">查看支出、帳單、商店與快速記帳。</div>
+              </div>
+              <button className="neo-btn px-3 py-2 bg-white font-pixel text-2xl shrink-0" onClick={() => setModal({ type:"shop" })}>
+                商店
+              </button>
+            </div>
+            <div className="mt-2 flex justify-end">
+              <button className="neo-btn px-3 py-2 bg-white font-pixel text-2xl" onClick={() => setScreen("home")}>
+                <span className="inline-flex items-center gap-2"><IconHome /> 回家</span>
+              </button>
+            </div>
+          </div>
+
+          <div className="mt-3 grid grid-cols-2 gap-2">
+            <div className="neo-card p-3">
+              <div className="text-xs text-slate-600">現金餘額</div>
+              <div className="font-pixel text-4xl break-words">{stats.money} 元</div>
+              <div className="text-xs text-slate-600 mt-2 break-words">本週固定支出：{livingCost} 元</div>
+            </div>
+            <div className="neo-card p-3">
+              <div className="font-pixel text-3xl leading-none break-words">未繳帳單</div>
+              <div className="text-xs text-slate-600 mt-1 break-words">{bills.length ? `共 ${bills.length} 筆` : "目前沒有帳單"}</div>
+            </div>
+          </div>
+
+          <div className="mt-3 neo-card p-3">
+            <div className="font-pixel text-3xl leading-none break-words">記帳小工具</div>
+            <div className="text-xs text-slate-600 mt-1 break-words">收入填正數，支出填負數。</div>
+            <div className="mt-3 grid grid-cols-2 gap-2">
+              <input value={name} onChange={e=>setName(e.target.value)} className="neo-btn bg-white p-3 text-sm border-2 border-slate-900 rounded-xl" placeholder="例如：交通費" />
+              <input value={amount} onChange={e=>setAmount(e.target.value)} className="neo-btn bg-white p-3 text-sm border-2 border-slate-900 rounded-xl" placeholder="例如：-120 或 500" inputMode="numeric" />
+            </div>
+            <button className="neo-btn mt-2 w-full bg-emerald-200 p-3 font-pixel text-3xl" onClick={()=>{
+              addLedgerEntry(name, amount);
+              setName(""); setAmount("");
+            }}>
+              新增記錄
+            </button>
+
+            {ledger.length > 0 ? (
+              <div className="mt-3 max-h-[24vh] overflow-auto pr-1 space-y-2">
+                {ledger.slice().reverse().slice(0,10).map(x => (
+                  <div key={x.id} className="neo-card-sm p-2 flex items-center justify-between gap-2 min-w-0">
+                    <div className="text-sm text-slate-800 break-words min-w-0">{x.name}</div>
+                    <div className={"font-pixel text-2xl shrink-0 " + (x.amount>=0 ? "text-emerald-700":"text-rose-700")}>
+                      {x.amount>=0?"+":""}{x.amount}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            ) : null}
+          </div>
         </div>
       );
     }
@@ -1529,81 +1431,6 @@
         );
       }
 
-      function renderFinanceApp(){
-        const [name, setName] = useState("");
-        const [amount, setAmount] = useState("");
-
-        function addLedgerEntry(nm, amt){
-          const n = String(nm||"").trim();
-          const a = Number(amt);
-          if(!n || !isFinite(a) || a === 0){ addLog("記帳失敗：請輸入名稱與金額（可正可負）。"); applyDelta({ mood:-1 }); return; }
-          const entry = { id: uid("led"), name: n, amount: a };
-          setLedger(prev => prev.concat([entry]).slice(-50));
-          applyDelta({ money: a });
-          addLog(`記帳：${n}（${a>0?"+":""}${a}）`);
-        }
-
-        return (
-          <div className="px-3 pb-28">
-            <div className="mt-3 neo-card p-3">
-              <div className="flex items-center justify-between gap-2">
-                <div className="min-w-0">
-                  <div className="font-pixel text-3xl leading-none break-words">財務管家</div>
-                  <div className="text-xs text-slate-600 mt-1 break-words">查看支出、帳單、商店與快速記帳。</div>
-                </div>
-                <button className="neo-btn px-3 py-2 bg-white font-pixel text-2xl shrink-0" onClick={() => setModal({ type:"shop" })}>
-                  商店
-                </button>
-              </div>
-              <div className="mt-2 flex justify-end">
-                <button className="neo-btn px-3 py-2 bg-white font-pixel text-2xl" onClick={() => setScreen("home")}>
-                  <span className="inline-flex items-center gap-2"><IconHome /> 回家</span>
-                </button>
-              </div>
-            </div>
-
-            <div className="mt-3 grid grid-cols-2 gap-2">
-              <div className="neo-card p-3">
-                <div className="text-xs text-slate-600">現金餘額</div>
-                <div className="font-pixel text-4xl break-words">{stats.money} 元</div>
-                <div className="text-xs text-slate-600 mt-2 break-words">本週固定支出：{livingCost} 元</div>
-              </div>
-              <div className="neo-card p-3">
-                <div className="font-pixel text-3xl leading-none break-words">未繳帳單</div>
-                <div className="text-xs text-slate-600 mt-1 break-words">{bills.length ? `共 ${bills.length} 筆` : "目前沒有帳單"}</div>
-              </div>
-            </div>
-
-            <div className="mt-3 neo-card p-3">
-              <div className="font-pixel text-3xl leading-none break-words">記帳小工具</div>
-              <div className="text-xs text-slate-600 mt-1 break-words">收入填正數，支出填負數。</div>
-              <div className="mt-3 grid grid-cols-2 gap-2">
-                <input value={name} onChange={e=>setName(e.target.value)} className="neo-btn bg-white p-3 text-sm border-2 border-slate-900 rounded-xl" placeholder="例如：交通費" />
-                <input value={amount} onChange={e=>setAmount(e.target.value)} className="neo-btn bg-white p-3 text-sm border-2 border-slate-900 rounded-xl" placeholder="例如：-120 或 500" inputMode="numeric" />
-              </div>
-              <button className="neo-btn mt-2 w-full bg-emerald-200 p-3 font-pixel text-3xl" onClick={()=>{ addLedgerEntry(name, amount); setName(""); setAmount(""); }}>
-                新增記錄
-              </button>
-
-              {ledger.length > 0 ? (
-                <div className="mt-3 max-h-[24vh] overflow-auto pr-1 space-y-2">
-                  {ledger.slice().reverse().slice(0,10).map(x => (
-                    <div key={x.id} className="neo-card-sm p-2 flex items-center justify-between gap-2 min-w-0">
-                      <div className="text-sm text-slate-800 break-words min-w-0">{x.name}</div>
-                      <div className={"font-pixel text-2xl shrink-0 " + (x.amount>=0 ? "text-emerald-700":"text-rose-700")}>
-                        {x.amount>=0?"+":""}{x.amount}
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              ) : null}
-            </div>
-          </div>
-        );
-      }
-
-      useEffect(() => { setMissions(prev => ({ ...prev, stableHousing: hasHouse || prev.stableHousing })); }, [hasHouse]);
-
       function EventModal({ eventId }){
         const sc = SCENARIOS[eventId];
         return (
@@ -1626,13 +1453,31 @@
         );
       }
 
+      useEffect(() => { setMissions(prev => ({ ...prev, stableHousing: hasHouse || prev.stableHousing })); }, [hasHouse]);
+
       function renderScreen(){
         if(screen === "landing") return renderLanding();
         if(screen === "home") return renderHome();
         if(screen === "job") return renderJobApp();
         if(screen === "house") return renderHouseApp();
         if(screen === "resource") return renderResourceApp();
-        if(screen === "finance") return renderFinanceApp();
+
+        if(screen === "finance"){
+          return (
+            <FinanceApp
+              stats={stats}
+              livingCost={livingCost}
+              bills={bills}
+              setScreen={setScreen}
+              setModal={setModal}
+              addLog={addLog}
+              applyDelta={applyDelta}
+              ledger={ledger}
+              setLedger={setLedger}
+            />
+          );
+        }
+
         if(screen === "ending") return renderHome();
         return renderHome();
       }
